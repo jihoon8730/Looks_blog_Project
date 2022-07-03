@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- bootstrap cdn -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+
+  <div class="wrap">
+    <!-- Modal창 부분 -->
+    <div class="black-modal">
+      <div class="white-modal">
+        <h3 style="font-weight: bold;">글쓰기 버튼 클릭</h3>
+        <h4>1. Title란에 제목을 입력</h4>
+        <h4>2. name란에 이름이나 닉네임을 입력</h4>
+        <h4>3. contents란에 적고싶은 내용을 입력</h4>
+        <h4>3. 글발행 버튼 클릭</h4>
+        <button type="button" class="btn btn-danger modal-close">닫기</button>
+      </div>
+    </div>
+
+    <!-- Update blog form modal창 -->
+    <div class="bkBlog-modal">
+      <div class="wtBlog-modal">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <!-- <button type="submit" class="btn btn-primary">수정</button> -->
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Navbar 부분 (bootstrap 사용) -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-center">
+        <a class="navbar-brand" href="#">L O O K S</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="shop.html">Shop</a>
+            </li>
+          </ul>
+          <!-- Darkmode -->
+          <div class="badge bg-light" style="cursor: pointer;">DarkMode🔄</div>
+        </div>
+      </nav>
+
+      <!-- main타이틀(LOOKS제목) -->
+      <div class="main-title">
+        <p class="font-weight-bold">LOOKS<span class="font-italic">.blog</span></p>
+      </div>
+
+      <div class="main-btn">
+        <button type="button" class="btn btn-dark p-2" id="main-blog">글쓰기</button>
+        <button type="button" class="btn btn-dark p-2" id="main-tuto">사용방법</button>
+      </div>
+
+      <!-- blog글쓰기 입력란 form -->
+      <form class="w-75 blog-form" id="blogForm">
+        <div class="form-group font-weight-bold" </div>
+          <label for="exampleFormControlInput1">Titile</label>
+          <input type="text" style='IME-MODE: active' class="form-control" id="title" placeholder="제목을 입력해 주세요.">
+        </div>
+        <div class="form-group font-weight-bold" </div>
+          <label for="exampleFormControlInput1">name</label>
+          <input type="text" class="form-control" id="name" placeholder="이름을 입력해 주세요.">
+        </div>
+        <div class="form-group font-weight-bold">
+          <label for="exampleFormControlTextarea1">contents</label>
+          <textarea class="form-control" rows="3" id="contents" placeholder="내용을 입력해 주세요."></textarea>
+        </div>
+        <div class="text-md-right">
+          <button type="button" class="btn btn-dark" id="blogformClose">닫기</button>
+          <button type="button" class="btn btn-primary" id="blogPrint">글발행</button>
+        </div>
+      </form>
+
+      <!-- <button type="button" class="btn btn-info" id="blogUpdate">수정</button> -->
+
+      <!-- card form부분 -->
+      <div class="row">
+      </div>
+    </div>
+  </div>
+  
+  <!-- firebase -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAoO-A3XK8CW505_4pcFhBb1voYoLFkJGU",
+      authDomain: "blogproject-1c80d.firebaseapp.com",
+      projectId: "blogproject-1c80d",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script>
+    const db = firebase.firestore();
+    db.collection('blog').get().then((result) => {
+      result.forEach((doc) => {
+        let temp = `<div id="cardList" class="card col-md-12 mt-3" style="width: 18rem;">
+                      <div class="card-body cardBody-border">
+                        <h5 class="card-title">${doc.data().title}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${doc.data().name}</h6>
+                        <p class="card-text">${doc.data().contents}</p>
+                      </div>
+                      <button type="button" class="btn btn-dark blogDelete" value="${doc.id}">삭제</button>
+                      <button type="button" class="blogUpdate btn btn-info">수정</button>
+                    </div>`
+        $('.row').append(temp);
+
+        // 중요!!!!!! 삭제 관련 기능 구현 문제점 해결법
+        // ID값 가져오는 곳 !! 음 뭐가 문제지?
+        // 중요!! 3월 10일 지금까지 나는 삭제 기능을 구현할때 첫번재 앨리먼트(첫번째 블로그카드만) 주구장창 지우고 있었음
+        // 내가 판단하기로는 글을 만들때 항상 첫번째가 되기 때문에 그랬던거 같음
+        // $(this)라는걸 통해 버튼에 들어가있는 id값을 여기 이것의 버튼을 이라고 바꿀 수 가 있나봄 간단하게
+        // 클릭하는 버튼의 값을 ~~ 이게 $(this).val() 인가봄
+        // 밑에는 okky 해결사님이 알려주신 해답 법
+
+        // 질문자님께서는 firebase보다는 JS DOM 조작 대한 이해가 부족해 보입니다.
+
+        // 질문자 님의 코드를 보면 blogDelete 클래스를 가진 엘리먼트 중 제일 첫 번째 엘리먼트의 값을 valueId에 넣고 클릭을 할 때마다 그 값을 사용해서 데이터를 지우고 있습니다. 이러면 당연히 첫번쨰 데이터만 지워지겠지요.
+
+        // 질문자님의 의도는 클릭한 엘리먼트의 데이터를 지우는 것이지요? 그러기 위해서는 당연히 클릭한 엘리먼트의 값을 읽어와서 처리해야 됩니다.
+
+        // 해당 작업을 처리하기 위해 다양한 방법이 있겠지만, 간단한 방법으로는
+
+        // click(function() { let valueId = $(this).val(); })
+
+        // 이러한 접근 방법이 있으니 적용해 보시길 바랍니다.
+      })
+      $('.blogDelete').click(function() {
+        let valueId = $(this).val();
+        db.collection('blog').doc(valueId).delete().then(() => {
+          alert('삭제가 완료되었습니다.')
+          window.location.reload();
+        });
+        console.log(valueId);
+      });
+    });
+
+    $('#blogPrint').click(function() {
+      let title = $('#title').val();
+      let name = $('#name').val();
+      let contents = $('#contents').val();
+      
+      if (title === "") {
+        alert('제목을 입력해 주세요!');
+        return false;
+      } else if (name === "") {
+        alert('이름을 입력해 주세요!')
+        return false;
+      } else if (contents === "") {
+        alert('내용을 입력해 주세요!')
+        return false;
+      } else {
+        alert('작성이 완료되었습니다.')
+        let blogInput = {
+        title : $('#title').val(),
+        name : $('#name').val(),
+        contents : $('#contents').val()
+        }
+        db.collection('blog').add(blogInput).then((result) => {
+          window.location.reload();
+        });
+        // bolg 글발행 클릭 후 input 값 초기화 null
+        $('#title').val(null);
+        $('#name').val(null);
+        $('#contents').val(null);
+      }
+    });
+  </script>
+
+
+
+  <!-- JS파일 로드 -->
+  <script src="index.js"></script>
+  <!-- jQuery cdn -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</body>
+
+<!-- 3월 9일 현재 공백이여도 데이터가 firebase로 넘어감 -->
+<!-- return : fasle로 해결함! -->
+
+<!-- 3월9일 현재 데이터 삭제 문제 해결 중  -->
+<!-- 블로그 글을 db에서 가져올 때 document id도 같이 출력해볼 수 있는데
+
+그걸 삭제버튼이나 주변 <input> 이런 곳에 몰래 숨겨놓고 
+
+삭제버튼 누르면 db.collection("cities").doc(숨겨놨던id).delete().then()
+
+실행하면 됩니다  -->
+
+<!-- 3월 10일 현재 문제 -->
+<!-- 삭제를 누르면 id값이 차례대로 삭제가 됨 (내가 원하는게 삭제가 안됨!!) -->
+<!-- 삭제 버튼 디자인 해보자..! -->
+<!-- 해결~! 위에 주석 참고-->
+
+<!-- 3월 11일 -->
+<!-- 이제 만들어 볼것 -->
+<!-- CRUD를 기반으로 Update해보기 -->
+<!-- 3월 12일 Update계속 진행 하기 -->
+
+</html>

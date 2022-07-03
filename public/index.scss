@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka&display=swap");
+
+* {
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: "Fredoka", sans-serif;
+}
+
+.navbar {
+  box-shadow: 3px 3px 3px gray;
+}
+
+.nav-center {
+  text-align: center;
+}
+
+.main-title {
+  font-size: 150px;
+  text-align: center;
+  margin-top: 100px;
+  span {
+    font-size: 30px;
+  }
+}
+
+.blog-form {
+  width: 100%;
+  margin: auto;
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 20px;
+  display: none;
+  box-shadow: 3px 3px 3px gray;
+}
+
+.main-btn {
+  text-align: center;
+  button {
+    margin: 10px;
+  }
+}
+
+.row {
+  margin: 20px 0px 20px 0px;
+}
+
+// card form 왼쪽 라인
+.card {
+  cursor: pointer;
+  border-left: 5px solid rgb(99, 153, 156);
+  box-shadow: 3px 3px 3px gray;
+  .card-title {
+    font-size: 20px;
+  }
+  .card-subtitle {
+    font-size: 12px;
+  }
+  button {
+    margin: 0px 0px 20px 15px;
+    width: 100px;
+  }
+}
+
+// Modal 창
+// 1. 전체배경 블랙으로 만들기
+.black-modal {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 5;
+  padding: 30px;
+  visibility: hidden;
+  opacity: 0;
+  margin-top: -1000px;
+  transition: all 1s;
+}
+
+.white-modal {
+  width: 50%;
+  height: auto;
+  background: #eeeeee;
+  padding: 30px;
+  margin: 10px auto 10px auto;
+  border-radius: 10px;
+  margin-top: 100px;
+  text-align: center;
+  button {
+    margin-top: 20px;
+  }
+}
+
+// 클래스를 붙였다 뗐다 하는 방식으로 modal창 보여주는거 구현 해봄
+.show-modal {
+  margin-top: 0px;
+  visibility: visible;
+  opacity: 1;
+}
+
+// blog cardform 수정 modal창
+.bkBlog-modal {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  position: fixed;
+  display: none;
+  .wtBlog-modal {
+    background: #eeeeee;
+    width: 60%;
+    height: auto;
+    margin: 300px auto 0px auto;
+    padding: 40px;
+  }
+}
